@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Open+Sans&display=swap");
+
+:root {
+  --mint-green: #c5d8a4;
+  --light-green: #f4fcd9;
+  --green: #64876a;
+  --dark-green: #3b4f18;
+  --light-brown: #bb9981;
+  --dark-brown: #534340;
+  --red: #aa3838;
+  --light-blue: #b8bfd9;
+  --black: #000000;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Caveat", sans-serif;
+}
+
+body {
+  background-color: var(--mint-green);
+}
+
+h1 {
+  color: var(--dark-green);
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.shelves-container {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(max-content, 50%));
+  grid-template-rows: repeat(3, minmax(150px, max-content));
+  background-color: var(--light-brown);
+  padding: 10px;
+  border-radius: 10px;
+  gap: 10px;
+}
+
+.shelf {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(min-content, max-content));
+  background-color: var(--dark-brown);
+  padding: 10px;
+  padding-bottom: 0;
+  gap: 10px;
+  align-items: end;
+}
+
+.top-shelf {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.bottom-shelf {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.red-book {
+  background-color: var(--red);
+}
+
+.blue-book {
+  background-color: var(--light-blue);
+}
+
+.green-book {
+  background-color: var(--green);
+}
+
+.controls {
+  display: flex;
+  gap: 20px;
+}
+
+.control-btn {
+  border-radius: 50%;
+  border: none;
+  background-color: var(--light-green);
+  cursor: pointer;
+}
+
+.controls-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.open {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+.modal-bg {
+  position: absolute;
+  background: var(--white);
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-add {
+  border-radius: 10px;
+  background: var(--light-green);
+  position: relative;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  outline: none;
+  appearance: none;
+  color: var(--dark-green);
+  background: none;
+  border: 0px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.radio-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.modal-controls-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.modal-controls {
+  background-color: var(--mint-green);
+  color: var(--dark-green);
+}

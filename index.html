@@ -1,10 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="./styles/index.css">
+    <script src="./scripts/app.js" defer></script>
+    <title>Book Nook Library</title>
   </head>
-  <body></body>
+  <body>
+    <main>
+      <h1>The Book Nook</h1>
+      <section class="shelves-container">
+        <div class="shelf top-shelf">
+          <button class="book red-book">Game of Thrones</button>
+          <button class="book blue-book">Harry Potter</button>
+          <button class="book green-book">Lord</button>
+        </div> 
+        <div class="shelf middle-shelf">
+          <span class="book red-book">Game of Thrones</span>
+          <span class="book blue-book">Harry Potter</span>
+          <span class="book green-book">Lord</span>
+        </div>
+        <div class="shelf bottom-shelf">
+          <span class="book red-book">Game of Thrones</span>
+          <span class="book blue-book">Harry Potter</span>
+          <span class="book green-book">Lord</span>
+        </div>
+      </section> 
+      <section class="controls">
+        <a data-modal="modal-add" class="control-btn add-book"><img src="./assets/icons/add.svg" alt="add a book" class="controls-icon"></a>
+        <a data-modal="modal-delete-all" class="control-btn delete-all-books"><img src="./assets/icons/delete.svg" alt="delete all books" class="controls-icon"></a>
+      </section>
+      <div class="modal" id="modal-add">
+        <div class="modal-bg modal-exit"></div>
+        <form action="#" method="post" class="modal-add" id="modal-add">
+          <button class="modal-close modal-exit">X</button>
+
+          <label  class="modal-label">Title:</label>
+          <input type="text" class="modal-input" id="book-title" placeholder="Book Title">
+
+          <label for="author" class="modal-label">Author:</label>
+          <input type="text" class="modal-input" id="author" placeholder="Author Name">
+
+          <label for="publish-date" class="modal-label">Published:</label>
+          <input type="text" class="modal-input" id="publish-date" placeholder="Date Published">       
+
+          <div class="radio-container">
+            <input type="radio" id="read-book" value="read-book">
+            <label for="read-book">Read this book?</label>
+          </div>
+
+          <div class="modal-controls-container">
+            <input type="submit" id="submit" class="modal-controls" form="modal-add">
+            <button class="modal-controls modal-exit">Close</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
 </html>

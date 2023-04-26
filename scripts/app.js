@@ -14,3 +14,14 @@ modals.forEach(function (trigger) {
     });
   });
 });
+
+const testBook = [
+  {
+    id: 1,
+    title: "Matilda",
+    author: "Roald Dahl",
+    pages: 239,
+    published: "October 1, 1988",
+    read: true,
+  },
+];

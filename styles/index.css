@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700&display=swap");
 
 :root {
   --mint-green: #c5d8a4;
@@ -16,11 +16,15 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Caveat", sans-serif;
+  font-family: "Roboto Slab", serif;
 }
 
 body {
   background-color: var(--mint-green);
+}
+
+header {
+  padding: 30px;
 }
 
 h1 {
@@ -48,10 +52,9 @@ main {
 
 .shelf {
   display: grid;
-  grid-template-columns: repeat(10, minmax(min-content, max-content));
+  grid-template-columns: repeat(10, 30px);
   background-color: var(--dark-brown);
-  padding: 10px;
-  padding-bottom: 0;
+  padding: 10px 5px 0 5px;
   gap: 10px;
   align-items: end;
 }
@@ -68,22 +71,36 @@ main {
 
 .book {
   display: flex;
-  flex-direction: column;
-  padding: 5px;
+  justify-content: space-around;
+  align-items: center;
   border-radius: 5px;
-  border: none;
   cursor: pointer;
+  height: 100%;
+  border: none;
 }
 
-.red-book {
+.book:hover {
+  border: 2px solid var(--white);
+  transition: 0.2s ease-out;
+  transform: scale(1.08);
+}
+
+.book p {
+  font-size: 0.8rem;
+  font-weight: bold;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.shelf .red-book {
   background-color: var(--red);
 }
 
-.blue-book {
+.shelf .blue-book {
   background-color: var(--light-blue);
 }
 
-.green-book {
+.shelf .green-book {
   background-color: var(--green);
 }
 
@@ -97,11 +114,15 @@ main {
   border: none;
   background-color: var(--light-green);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .controls-icon {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 }
 
 .modal {
@@ -139,19 +160,25 @@ main {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  box-shadow: 0px 0px 0px 12px rgba(197, 216, 164, 1);
 }
 
 .modal-close {
   position: absolute;
-  right: 15px;
-  top: 15px;
+  right: 0;
+  top: 0;
+  padding: 5px 10px;
   outline: none;
   appearance: none;
   color: var(--dark-green);
   background: none;
-  border: 0px;
+  border: none;
   font-weight: bold;
   cursor: pointer;
+}
+
+.modal-close svg {
+  width: 1.2em;
 }
 
 .radio-container {
@@ -169,4 +196,8 @@ main {
 .modal-controls {
   background-color: var(--mint-green);
   color: var(--dark-green);
+  border: 3px dotted var(--dark-green);
+  padding: 5px 10px;
+  border-radius: 8px;
 }
+

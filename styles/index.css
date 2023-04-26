@@ -52,11 +52,11 @@ main {
 
 .shelf {
   display: grid;
-  grid-template-columns: repeat(10, 30px);
-  background-color: var(--dark-brown);
-  padding: 10px 5px 0 5px;
-  gap: 10px;
+  grid-template-columns: repeat(10, 1fr);
+  row-gap: 20px;
+  column-gap: 10px;
   align-items: end;
+  background-color: var(--dark-brown);
 }
 
 .top-shelf {
@@ -71,14 +71,15 @@ main {
 
 .book {
   display: flex;
-  justify-content: space-around;
   align-items: center;
   border-radius: 5px;
   cursor: pointer;
   height: 100%;
   border: none;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: bold;
+  padding: 20px;
+  background-color: #aa3838;
 }
 
 .book:hover {

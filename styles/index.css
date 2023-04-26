@@ -77,6 +77,8 @@ main {
   cursor: pointer;
   height: 100%;
   border: none;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 
 .book:hover {
@@ -85,7 +87,7 @@ main {
   transform: scale(1.08);
 }
 
-.book p {
+.book-title {
   font-size: 0.8rem;
   font-weight: bold;
   writing-mode: vertical-rl;
@@ -200,4 +202,3 @@ main {
   padding: 5px 10px;
   border-radius: 8px;
 }
-

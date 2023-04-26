@@ -56,65 +56,7 @@ bookNookLibrary.forEach(function (book) {
   bookButton.classList.add("book");
   //creates pop up... but can't exit it without refreshing page
   bookButton.addEventListener("click", function () {
-    const overlay = document.createElement("div");
-    overlay.style.position = "fixed";
-    overlay.style.top = "0";
-    overlay.style.left = "0";
-    overlay.style.width = "100%";
-    overlay.style.height = "100%";
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-    overlay.style.display = "flex";
-    overlay.style.alignItems = "center";
-    overlay.style.justifyContent = "center";
-
-    const bookDetails = document.createElement("div");
-    bookDetails.style.backgroundColor = "white";
-    bookDetails.style.padding = "20px";
-    bookDetails.style.borderRadius = "10px";
-
-    const titleLabel = document.createElement("span");
-    titleLabel.textContent = "Title: ";
-    const titleValue = document.createElement("span");
-    titleValue.textContent = book.title;
-    bookDetails.appendChild(titleLabel);
-    bookDetails.appendChild(titleValue);
-    bookDetails.appendChild(document.createElement("br"));
-
-    const authorLabel = document.createElement("span");
-    authorLabel.textContent = "Author: ";
-    const authorValue = document.createElement("span");
-    authorValue.textContent = book.author;
-    bookDetails.appendChild(authorLabel);
-    bookDetails.appendChild(authorValue);
-    bookDetails.appendChild(document.createElement("br"));
-
-    const pagesLabel = document.createElement("span");
-    pagesLabel.textContent = "Number of pages: ";
-    const pagesValue = document.createElement("span");
-    pagesValue.textContent = book.pages;
-    bookDetails.appendChild(pagesLabel);
-    bookDetails.appendChild(pagesValue);
-    bookDetails.appendChild(document.createElement("br"));
-
-    const publishDateLabel = document.createElement("span");
-    publishDateLabel.textContent = "Published: ";
-    const publishDateValue = document.createElement("span");
-    publishDateValue.textContent = book.published;
-    bookDetails.appendChild(publishDateLabel);
-    bookDetails.appendChild(publishDateValue);
-    bookDetails.appendChild(document.createElement("br"));
-
-    const haveReadLabel = document.createElement("span");
-    haveReadLabel.textContent = "Read? ";
-    const haveReadValue = document.createElement("span");
-    haveReadValue.textContent = book.read;
-    bookDetails.appendChild(haveReadLabel);
-    bookDetails.appendChild(haveReadValue);
-
-    overlay.appendChild(bookDetails);
-
-    // Append the overlay to the body of the document
-    document.body.appendChild(overlay);
+    console.log("Book details");
   });
 
   //Create title element based off books title

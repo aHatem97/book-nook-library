@@ -18,6 +18,9 @@ modals.forEach(function (trigger) {
   });
 });
 
+//Array library of book objects
+let allBooks = [];
+
 // Constructor
 function Book(title, author, pages, published, read) {
   this.title = title;
@@ -27,18 +30,35 @@ function Book(title, author, pages, published, read) {
   this.read = read;
 }
 
+//Form Event Listener
 addForm.addEventListener("submit", (e) => {
+  handleFormSubmit(e);
+});
+
+//Submit function for adding books
+function handleFormSubmit(e) {
   e.preventDefault();
+  const titleInput = document.getElementById("book-title").value;
+  const authorInput = document.getElementById("author").value;
+  //checks if book exists in array first
+  const existingBook = allBooks.find((book) => {
+    return book.title === titleInput && book.author === authorInput;
+  });
+
+  if (existingBook) {
+    alert("This book already exists! Please add a different book.");
+    return;
+  }
 
   const addBook = new Book(
-    document.getElementById("book-title").value,
-    document.getElementById("author").value,
+    titleInput,
+    authorInput,
     document.getElementById("pages-count").value,
     document.getElementById("publish-date").value,
     document.getElementById("read-book").value
   );
 
-  let allBooks = [addBook];
+  allBooks.push(addBook);
 
   allBooks.forEach(function (book) {
     //Create button element for book in hmtl
@@ -79,4 +99,4 @@ addForm.addEventListener("submit", (e) => {
 
     bookContainer.appendChild(bookButton);
   });
-});
+}

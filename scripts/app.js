@@ -33,6 +33,7 @@ function Book(title, author, pages, published, read) {
 //Form Event Listener
 addForm.addEventListener("submit", (e) => {
   handleFormSubmit(e);
+  console.log("submit listener");
 });
 
 //Submit function for adding books

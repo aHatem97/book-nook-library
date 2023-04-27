@@ -11,7 +11,7 @@
     <main>
         <h1>The Book Nook</h1>
       <section class="shelves-container">
-        <div class="shelf top-shelf"></div> 
+        <div class="shelf top-shelf" id="book-list"></div> 
         <div class="shelf middle-shelf"></div>
         <div class="shelf bottom-shelf"></div>
       </section> 
@@ -102,7 +102,7 @@
           <p class="delete-confirm">Are you sure you want to delete ALL of the books?</p>
 
           <div class="modal-controls-container">
-            <button type="submit" id="del-submit" class="modal-controls">Yes!</button>
+            <button type="submit" id="del-submit" class="modal-controls delete-all">Yes!</button>
             <button class="modal-controls modal-exit">No!</button>
           </div>
         </form>
@@ -138,21 +138,21 @@
 
           <div class="output-container">
             
-            <input type="text" id="output-title" class="book-content output-book-title" disabled>
+            <h1 type="text" id="output-title" class="book-content output-book-title"></h1>
 
             <div class="author-info">
-              <label for="output-author" class="book-label">By: </label>
-              <input type="text" id="output-author" class="book-content" disabled>
+              <h2 for="output-author" class="book-label">By: </h2>
+              <p type="text" id="output-author" class="book-content"></p>
             </div>
 
             <div class="output-info pages-info">
-              <label for="output-pages" class="book-label">Number of Pages: </label>
-              <input type="text" id="output-pages" class="book-content test" disabled>
+              <h2 for="output-pages" class="book-label">Number of Pages: </h2>
+              <p type="text" id="output-pages" class="book-content test"></p>
             </div>
 
             <div class="output-info published-info">
               <label for="output-published" class="book-label">Published: </label>
-              <input type="text" id="output-published" class="book-content test" disabled>
+              <p type="text" id="output-published" class="book-content test"></p>
             </div>
             
             <input type="checkbox" id="output-read" class="book-content" disabled>

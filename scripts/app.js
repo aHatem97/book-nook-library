@@ -2,6 +2,7 @@ const modals = document.querySelectorAll("[data-modal]");
 const addForm = document.querySelector(".modal-add-form");
 const delForm = document.querySelector(".modal-delete-form");
 const bookContainer = document.querySelector(".shelf");
+const deleteAllBooks = document.getElementById("del-submit");
 
 modals.forEach(function (trigger) {
   trigger.addEventListener("click", function (event) {
@@ -33,7 +34,6 @@ function Book(title, author, pages, published, read) {
 //Form Event Listener
 addForm.addEventListener("submit", (e) => {
   handleFormSubmit(e);
-  console.log("submit listener");
 });
 
 //Submit function for adding books
@@ -60,6 +60,10 @@ function handleFormSubmit(e) {
   );
 
   allBooks.push(addBook);
+  console.log(allBooks);
+
+  //clears the UI of child elements so nothing duplicates outside of the book array
+  bookContainer.innerHTML = "";
 
   allBooks.forEach(function (book) {
     //Create button element for book in hmtl
@@ -79,17 +83,19 @@ function handleFormSubmit(e) {
         });
       });
       //populating modal with our object
-      const outputTitle = (document.getElementById("output-title").value =
-        book.title);
-      const outputAuthor = (document.getElementById("output-author").value =
-        book.author);
-      const outputPages = (document.getElementById("output-pages").value =
-        book.pages);
-      const outputPublished = (document.getElementById(
-        "output-published"
+      const outputTitle = document.querySelector("#output-title");
+      const outputAuthor = document.querySelector("#output-author");
+      const outputPages = document.querySelector("#output-pages");
+      const outputPublished = (document.querySelector(
+        "#output-published"
       ).value = book.published);
-      const outputRead = (document.getElementById("output-read").value =
-        book.read);
+      const outputRead = document.getElementById("output-read");
+
+      outputTitle.textContent = book.title;
+      outputAuthor.textContent = book.author;
+      outputPages.textContent = book.pages;
+      outputPublished.textContent = book.published;
+      outputRead.textContent = book.read;
     });
     //Create title element based off books title
     const bookTitle = document.createElement("p");
@@ -101,3 +107,9 @@ function handleFormSubmit(e) {
     bookContainer.appendChild(bookButton);
   });
 }
+// //Delete all function
+deleteAllBooks.addEventListener("click", function (e) {
+  e.preventDefault();
+  allBooks.length = 0;
+  bookContainer.innerHTML = "";
+});

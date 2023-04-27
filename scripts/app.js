@@ -2,6 +2,7 @@ const modals = document.querySelectorAll("[data-modal]");
 const addForm = document.querySelector(".modal-add-form");
 const delForm = document.querySelector(".modal-delete-form");
 const bookContainer = document.querySelector(".shelf");
+const deleteAllBooks = document.getElementById("del-submit");
 
 modals.forEach(function (trigger) {
   trigger.addEventListener("click", function (event) {
@@ -18,6 +19,9 @@ modals.forEach(function (trigger) {
   });
 });
 
+//Array library of book objects
+let allBooks = [];
+
 // Constructor
 function Book(title, author, pages, published, read) {
   this.title = title;
@@ -27,18 +31,39 @@ function Book(title, author, pages, published, read) {
   this.read = read;
 }
 
+//Form Event Listener
 addForm.addEventListener("submit", (e) => {
+  handleFormSubmit(e);
+});
+
+//Submit function for adding books
+function handleFormSubmit(e) {
   e.preventDefault();
+  const titleInput = document.getElementById("book-title").value;
+  const authorInput = document.getElementById("author").value;
+  //checks if book exists in array first
+  const existingBook = allBooks.find((book) => {
+    return book.title === titleInput && book.author === authorInput;
+  });
+
+  if (existingBook) {
+    alert("This book already exists! Please add a different book.");
+    return;
+  }
 
   const addBook = new Book(
-    document.getElementById("book-title").value,
-    document.getElementById("author").value,
+    titleInput,
+    authorInput,
     document.getElementById("pages-count").value,
     document.getElementById("publish-date").value,
     document.getElementById("read-book").value
   );
 
-  let allBooks = [addBook];
+  allBooks.push(addBook);
+  console.log(allBooks);
+
+  //clears the UI of child elements so nothing duplicates outside of the book array
+  bookContainer.innerHTML = "";
 
   allBooks.forEach(function (book) {
     //Create button element for book in hmtl
@@ -58,17 +83,19 @@ addForm.addEventListener("submit", (e) => {
         });
       });
       //populating modal with our object
-      const outputTitle = (document.getElementById("output-title").value =
-        book.title);
-      const outputAuthor = (document.getElementById("output-author").value =
-        book.author);
-      const outputPages = (document.getElementById("output-pages").value =
-        book.pages);
-      const outputPublished = (document.getElementById(
-        "output-published"
+      const outputTitle = document.querySelector("#output-title");
+      const outputAuthor = document.querySelector("#output-author");
+      const outputPages = document.querySelector("#output-pages");
+      const outputPublished = (document.querySelector(
+        "#output-published"
       ).value = book.published);
-      const outputRead = (document.getElementById("output-read").value =
-        book.read);
+      const outputRead = document.getElementById("output-read");
+
+      outputTitle.textContent = book.title;
+      outputAuthor.textContent = book.author;
+      outputPages.textContent = book.pages;
+      outputPublished.textContent = book.published;
+      outputRead.textContent = book.read;
     });
     //Create title element based off books title
     const bookTitle = document.createElement("p");
@@ -79,4 +106,10 @@ addForm.addEventListener("submit", (e) => {
 
     bookContainer.appendChild(bookButton);
   });
+}
+// //Delete all function
+deleteAllBooks.addEventListener("click", function (e) {
+  e.preventDefault();
+  allBooks.length = 0;
+  bookContainer.innerHTML = "";
 });

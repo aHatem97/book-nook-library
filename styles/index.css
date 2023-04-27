@@ -312,6 +312,10 @@ input[type="number"] {
   padding: 0 30px 0 30px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: calc(150px + 15vw);
+  height: 200px;
   gap: 15px;
 }
 
@@ -320,17 +324,20 @@ input[type="number"] {
   text-align: center;
   background-color: transparent;
   border: none;
-  width: min-content;
+  width: max-content
 }
 
 .book-label,
 .book-content {
   font-size: 24px;
+ 
 }
 
 .output-book-title {
-  font-size: 48px;
+  font-size: 2.5rem;
+  word-wrap: break-word;
 }
+
 
 .modal-close {
   fill: var(--dark-green);
@@ -348,9 +355,16 @@ input[type="number"] {
   color: var(--black);
 }
 
-.author-info {
+
+.output-container div {
+  width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.output-container div h2 {
+  font-weight: bold;
 }
 
 .output-info {

@@ -20,7 +20,15 @@ modals.forEach(function (trigger) {
 });
 
 //Array library of book objects
-let allBooks = [];
+let allBooks = [
+  {
+    title: "Matilda",
+    author: "Roanld Dahl",
+    pages: 231,
+    published: "October 21, 1988",
+    read: true,
+  },
+];
 
 // Constructor
 function Book(title, author, pages, published, read) {
@@ -86,9 +94,7 @@ function handleFormSubmit(e) {
       const outputTitle = document.querySelector("#output-title");
       const outputAuthor = document.querySelector("#output-author");
       const outputPages = document.querySelector("#output-pages");
-      const outputPublished = (document.querySelector(
-        "#output-published"
-      ).value = book.published);
+      const outputPublished = document.querySelector("#output-published")
       const outputRead = document.getElementById("output-read");
 
       outputTitle.textContent = book.title;
@@ -97,6 +103,7 @@ function handleFormSubmit(e) {
       outputPublished.textContent = book.published;
       outputRead.textContent = book.read;
     });
+    console.log(book.published)
     //Create title element based off books title
     const bookTitle = document.createElement("p");
     bookTitle.textContent = `"${book.title}"`;

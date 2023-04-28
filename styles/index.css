@@ -168,7 +168,7 @@ main {
   padding: 5px 10px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 1rem;
 }
 
 .modal-controls:hover {
@@ -224,14 +224,14 @@ main {
 
 .modal-label {
   color: var(--dark-green);
-  font-size: 36px;
+  font-size: 1.3rem;
 }
 
 .modal-input {
   background-color: transparent;
   border: none;
   border-bottom: 2px dotted var(--dark-green);
-  font-size: 24px;
+  font-size: 1rem;
 }
 
 .modal-input:focus {
@@ -254,8 +254,11 @@ main {
 }
 
 .checkbox {
-  width: 25px;
-  height: 25px;
+  width: 22px;
+}
+
+.checkbox-text {
+  font-size: 1rem;
 }
 
 .checkbox:hover,

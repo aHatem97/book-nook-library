@@ -35,11 +35,12 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  height: 100vh;
 }
 
 /* ------- Page Layout End ------- */
 
-/* ------- Book Shelf Section Start ------- */
+/* ------- Book shelf Section Start ------- */
 
 .page-title {
   color: var(--dark-green);
@@ -48,7 +49,7 @@ main {
 .shelves-container {
   display: grid;
   grid-template-columns: repeat(1, minmax(30vw, 50vw));
-  grid-template-rows: repeat(3, minmax(150px, max-content));
+  grid-template-rows: auto;
   background-color: var(--light-brown);
   padding: 10px;
   border-radius: 10px;
@@ -58,17 +59,18 @@ main {
 .shelf {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: minmax(100px, max-content);
   gap: 20px;
   background-color: var(--dark-brown);
   padding: 10px 10px 0 10px;
 }
 
-.top-shelf {
+.shelf:first-child {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
-.bottom-shelf {
+.shelf:last-child {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -97,12 +99,13 @@ main {
   rotate: 180deg;
 }
 
-/* ------- Book Shelf Section End ------- */
+/* ------- Book shelf Section End ------- */
 
-/* ------- Book Shelf Control Section Start ------- */
+/* ------- Book shelf Control Section Start ------- */
 
 .controls {
   display: flex;
+  flex-direction: row;
   gap: 20px;
 }
 
@@ -126,7 +129,7 @@ main {
   height: 4rem;
 }
 
-/* ------- Book Shelf Control Section End ------- */
+/* ------- Book shelf Control Section End ------- */
 
 /* ------- Shared Modal Styles Start ------- */
 
@@ -168,7 +171,7 @@ main {
   padding: 5px 10px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 1rem;
 }
 
 .modal-controls:hover {
@@ -224,14 +227,14 @@ main {
 
 .modal-label {
   color: var(--dark-green);
-  font-size: 36px;
+  font-size: 1.3rem;
 }
 
 .modal-input {
   background-color: transparent;
   border: none;
   border-bottom: 2px dotted var(--dark-green);
-  font-size: 24px;
+  font-size: 1rem;
 }
 
 .modal-input:focus {
@@ -254,8 +257,11 @@ main {
 }
 
 .checkbox {
-  width: 25px;
-  height: 25px;
+  width: 22px;
+}
+
+.checkbox-text {
+  font-size: 1rem;
 }
 
 .checkbox:hover,
@@ -391,8 +397,9 @@ input[type="number"] {
 
 .book-controls {
   display: flex;
-  justify-content: center;
-  padding-bottom: 10px;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding: 10px;
   background-color: transparent;
   border: none;
 }

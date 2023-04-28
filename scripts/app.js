@@ -5,6 +5,7 @@ const bookContainer = document.querySelector(".shelf");
 const deleteCurrentBook = document.getElementById("delete-book");
 const closeOnSubmit = document.querySelector(".modal");
 const closeOnDelete = document.querySelector(".modal-delete");
+const shelfContainer = document.querySelector(".shelves-container");
 
 modals.forEach(function (trigger) {
   trigger.addEventListener("click", function (event) {
@@ -38,7 +39,7 @@ addForm.addEventListener("submit", (e) => {
   handleFormSubmit(e);
 });
 
-//Submit function for adding books
+//Call Event Handler for adding books
 function handleFormSubmit(e) {
   e.preventDefault();
   const titleInput = document.getElementById("book-title").value;
@@ -53,74 +54,130 @@ function handleFormSubmit(e) {
     return;
   } else {
     closeOnSubmit.classList.remove("open");
+    addBookToShelf(e);
   }
+}
+
+//Create new Shelf
+
+let currentShelf = getCurrentShelf();
+
+function createNewShelf() {
+  let shelfCount = 1;
+  const newShelf = document.createElement("div");
+  newShelf.classList.add("shelf");
+  const shelfClassName = "shelf-" + shelfCount;
+  newShelf.classList.add(shelfClassName);
+  //checks if shelf already exists then inserts new shelf after it.
+  const lastShelf = getCurrentShelf();
+  if (lastShelf) {
+    shelfContainer.insertBefore(newShelf, lastShelf.nextSibling);
+  } else {
+    shelfContainer.appendChild(newShelf);
+  }
+  shelfCount++;
+  return newShelf;
+}
+
+//Returns most recently created shelf
+function getCurrentShelf() {
+  const shelves = shelfContainer.querySelectorAll(".shelf");
+  const currentShelf = shelves[shelves.length - 1];
+  return currentShelf;
+}
+
+//Create Book
+function addBookToShelf() {
+  const checkbox = document.getElementById("read-book");
+  const readBook = checkbox.checked; //returns true or false value if checkbox was checked
 
   const addBook = new Book(
-    titleInput,
-    authorInput,
+    document.getElementById("book-title").value,
+    document.getElementById("author").value,
     document.getElementById("pages-count").value,
     document.getElementById("publish-date").value,
-    document.getElementById("read-book").value
+    readBook
   );
-
   allBooks.push(addBook);
   console.log(allBooks);
+  const newBook = createBookButton(addBook);
+  const bookTitle = createBookTitle(addBook);
+  newBook.appendChild(bookTitle);
 
-  //clears the UI of child elements so nothing duplicates outside of the book array
-  bookContainer.innerHTML = "";
+  currentShelf.appendChild(newBook);
 
-  allBooks.forEach(function (book) {
-    //Create button element for book in hmtl
-    const bookButton = document.createElement("button");
-    bookButton.classList.add("book");
-    bookButton.setAttribute("data-modal", "modal-book");
-    //creates pop up...
-    bookButton.addEventListener("click", function (event) {
+  // Check if the current shelf contains 3 buttons
+  if (currentShelf.children.length >= 3) {
+    // Create a new shelf
+    currentShelf = createNewShelf(shelfContainer);
+  }
+
+  // Add a unique class name to the book button
+  newBook.classList.add("book-" + (allBooks.length - 1));
+
+  clearInputFields();
+}
+
+// Clears form Inputs after submit
+function clearInputFields() {
+  document.getElementById("form").reset();
+}
+
+//Creates Book Button UI
+function createBookButton(book) {
+  const bookButton = document.createElement("button");
+  bookButton.classList.add("book");
+  bookButton.setAttribute("data-modal", "modal-book");
+
+  bookButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    const modal = document.getElementById(bookButton.dataset.modal);
+    const exits = modal.querySelectorAll(".modal-exit");
+
+    modal.classList.add("open");
+    deleteCurrentBook.addEventListener("click", function (event) {
       event.preventDefault();
-      const modal = document.getElementById(bookButton.dataset.modal);
-      modal.classList.add("open");
-      deleteCurrentBook.addEventListener("click", function (event) {
-        event.preventDefault();
-        console.log("all books: ", allBooks);
-        let currentBook = allBooks.indexOf(book);
-        let removeThis = allBooks.splice(currentBook, 1);
-        console.log("removeThis: ", removeThis);
-        console.log("button before: ", bookButton);
-        bookContainer.removeChild(bookButton);
-        console.log("button after: ", bookButton);
-        console.log("all books again: ", allBooks);
-        modal.classList.remove("open");
-      });
-      const exits = modal.querySelectorAll(".modal-exit");
-      exits.forEach(function (exit) {
-        exit.addEventListener("click", function (event) {
-          event.preventDefault();
-          closeOnSubmit.classList.remove("open");
-        });
-      });
-      //populating modal with our object
-      const outputTitle = document.querySelector("#output-title");
-      const outputAuthor = document.querySelector("#output-author");
-      const outputPages = document.querySelector("#output-pages");
-      const outputPublished = document.querySelector("#output-published");
-      const outputRead = document.getElementById("output-read");
-
-      outputTitle.textContent = book.title;
-      outputAuthor.textContent = book.author;
-      outputPages.textContent = book.pages;
-      outputPublished.textContent = book.published;
-      outputRead.textContent = book.read;
+      //  let currentBook = allBooks.indexOf(book);
+      //  let removeThis = allBooks.splice(currentBook, 1);
+      //  console.log("removeThis: ", removeThis);
+      //  console.log("button before: ", bookButton);
+      bookContainer.removeChild(bookButton);
+      modal.classList.remove("open");
     });
-    console.log(book.published);
-    //Create title element based off books title
-    const bookTitle = document.createElement("p");
-    bookTitle.textContent = `"${book.title}"`;
-    bookTitle.classList.add("book-title");
-    //Assigns bookTitle as Child to bookButton
-    bookButton.appendChild(bookTitle);
 
-    bookContainer.appendChild(bookButton);
+    exits.forEach(function (exit) {
+      exit.addEventListener("click", function (event) {
+        event.preventDefault();
+        closeOnSubmit.classList.remove("open");
+      });
+    });
+    //populating modal with our object
+    const outputTitle = document.querySelector("#output-title");
+    const outputAuthor = document.querySelector("#output-author");
+    const outputPages = document.querySelector("#output-pages");
+    const outputPublished = document.querySelector("#output-published");
+
+    outputTitle.textContent = book.title;
+    outputAuthor.textContent = book.author;
+    outputPages.textContent = book.pages;
+    outputPublished.textContent = book.published;
+    //displays different icons if read or not
+    if (book.read) {
+      document.getElementById("star-1").style.display = "block";
+      document.getElementById("star-2").style.display = "none";
+    } else {
+      document.getElementById("star-1").style.display = "none";
+      document.getElementById("star-2").style.display = "block";
+    }
   });
+  return bookButton;
+}
+//add Title to book button on shelf
+function createBookTitle(book) {
+  const bookTitle = document.createElement("p");
+  bookTitle.textContent = `"${book.title}`;
+  bookTitle.classList.add("book-title");
+  return bookTitle;
 }
 
 // delete all then close modal

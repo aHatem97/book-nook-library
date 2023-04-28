@@ -11,8 +11,8 @@
   <body>
     <main>
       <h1 class="page-title">The Book Nook</h1>
-      <section class="shelves-container">
-        <div class="shelf section1"></div>
+      <section id="shelves-container" class="shelves-container">
+        <div class="shelf shelf-0"></div>
       </section>
       <section class="controls">
         <button data-modal="modal-add" class="control-btn add-book">
@@ -32,7 +32,7 @@
       </section>
       <div class="modal modal-add" id="modal-add">
         <div class="modal-bg modal-exit"></div>
-        <form class="modal-add-form" id="modal-add">
+        <form class="modal-add-form" id="form">
           <section class="modal-close-container">
             <svg
               class="modal-close modal-exit"
@@ -109,7 +109,6 @@
                 type="checkbox"
                 class="checkbox"
                 id="read-book"
-                value="yes"
                 name="Read"
               />
               <label for="read-book" class="checkbox-text modal-label">
@@ -233,16 +232,13 @@
               <h2 class="book-label">Published:</h2>
               <p type="text" id="output-published" class="book-content"></p>
             </div>
-
-            <input
-              type="checkbox"
-              id="output-read"
-              class="book-content"
-              disabled
-            />
           </section>
 
           <button class="book-controls">
+            <div id="output-read" class="star-icons">
+              <img src="./assets/icons/star_filled.svg" alt="" id="star-1" />
+              <img src="./assets/icons/star_outline.svg" alt="" id="star-2" />
+            </div>
             <svg
               id="delete-book"
               viewBox="0 0 24 24"

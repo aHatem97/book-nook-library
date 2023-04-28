@@ -2,7 +2,9 @@ const modals = document.querySelectorAll("[data-modal]");
 const addForm = document.querySelector(".modal-add-form");
 const delForm = document.querySelector(".modal-delete-form");
 const bookContainer = document.querySelector(".shelf");
-const deleteAllBooks = document.getElementById("del-submit");
+const deleteCurrentBook = document.getElementById("delete-book");
+const closeOnSubmit = document.querySelector(".modal");
+const test = document.querySelector(".modal-delete");
 
 modals.forEach(function (trigger) {
   trigger.addEventListener("click", function (event) {
@@ -49,6 +51,8 @@ function handleFormSubmit(e) {
   if (existingBook) {
     alert("This book already exists! Please add a different book.");
     return;
+  } else {
+    closeOnSubmit.classList.remove("open");
   }
 
   const addBook = new Book(
@@ -70,16 +74,28 @@ function handleFormSubmit(e) {
     const bookButton = document.createElement("button");
     bookButton.classList.add("book");
     bookButton.setAttribute("data-modal", "modal-book");
-    //creates pop up... but can't exit it without refreshing page
+    //creates pop up...
     bookButton.addEventListener("click", function (event) {
       event.preventDefault();
       const modal = document.getElementById(bookButton.dataset.modal);
       modal.classList.add("open");
+      deleteCurrentBook.addEventListener("click", function (event) {
+        event.preventDefault();
+        console.log("all books: ", allBooks);
+        let currentBook = allBooks.indexOf(book);
+        let removeThis = allBooks.splice(currentBook, 1);
+        console.log("removeThis: ", removeThis);
+        console.log("button before: ", bookButton);
+        bookContainer.removeChild(bookButton);
+        console.log("button after: ", bookButton);
+        console.log("all books again: ", allBooks);
+        modal.classList.remove("open");
+      });
       const exits = modal.querySelectorAll(".modal-exit");
       exits.forEach(function (exit) {
         exit.addEventListener("click", function (event) {
           event.preventDefault();
-          modal.classList.remove("open");
+          closeOnSubmit.classList.remove("open");
         });
       });
       //populating modal with our object
@@ -106,9 +122,11 @@ function handleFormSubmit(e) {
     bookContainer.appendChild(bookButton);
   });
 }
-// //Delete all function
-deleteAllBooks.addEventListener("click", function (e) {
+
+// delete all then close modal
+delForm.addEventListener("submit", function (e) {
   e.preventDefault();
   allBooks.length = 0;
   bookContainer.innerHTML = "";
+  test.classList.remove("open");
 });

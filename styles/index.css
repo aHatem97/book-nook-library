@@ -1,3 +1,5 @@
+/* ------- fonts and global stuff ------- */
+
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Open+Sans&display=swap");
 
 :root {
@@ -11,27 +13,21 @@
   --light-blue: #b8bfd9;
   --black: #000000;
   --white: #ffffff;
+  --gray: #808080;
 }
 
 * {
   margin: 0;
   padding: 0;
   font-family: "Caveat", sans-serif;
-  color: var(--mint-green);
 }
+
+/* ------- fonts and global stuff ------- */
+
+/* ------- Page Layout Start ------- */
 
 body {
   background-color: var(--mint-green);
-}
-
-header {
-  padding: 30px;
-}
-
-h1 {
-  color: var(--dark-green);
-  display: flex;
-  justify-content: center;
 }
 
 main {
@@ -39,7 +35,14 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin: 1em;
+}
+
+/* ------- Page Layout End ------- */
+
+/* ------- Book Shelf Section Start ------- */
+
+.page-title {
+  color: var(--dark-green);
 }
 
 .shelves-container {
@@ -55,9 +58,7 @@ main {
 .shelf {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  row-gap: 20px;
-  column-gap: 10px;
-  align-items: end;
+  gap: 20px;
   background-color: var(--dark-brown);
   padding: 10px 10px 0 10px;
 }
@@ -75,13 +76,11 @@ main {
 .book {
   display: flex;
   align-items: center;
+  justify-content: center;
   border-radius: 5px;
   cursor: pointer;
   height: 100%;
   border: none;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 20px;
   background-color: #aa3838;
 }
 
@@ -95,21 +94,12 @@ main {
   font-size: 1.5rem;
   font-weight: bold;
   writing-mode: vertical-rl;
-  text-orientation: mixed;
   rotate: 180deg;
 }
 
-.shelf .red-book {
-  background-color: var(--red);
-}
+/* ------- Book Shelf Section End ------- */
 
-.shelf .blue-book {
-  background-color: var(--light-blue);
-}
-
-.shelf .green-book {
-  background-color: var(--green);
-}
+/* ------- Book Shelf Control Section Start ------- */
 
 .controls {
   display: flex;
@@ -122,8 +112,7 @@ main {
   background-color: var(--light-green);
   cursor: pointer;
   display: flex;
-  justify-content: center;
-  align-items: center;
+
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
@@ -133,9 +122,13 @@ main {
 }
 
 .controls-icon {
-  width: 40px;
-  height: 40px;
+  width: 4rem;
+  height: 4rem;
 }
+
+/* ------- Book Shelf Control Section End ------- */
+
+/* ------- Shared Modal Styles Start ------- */
 
 .modal {
   position: fixed;
@@ -143,8 +136,7 @@ main {
   height: 100%;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
-  margin: 0 auto;
+  transition: all 0.5s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -153,23 +145,76 @@ main {
 .modal.open {
   visibility: visible;
   opacity: 1;
-  transition-delay: 0s;
 }
 
 .modal-bg {
   position: absolute;
-  background: var(--white);
-  opacity: 0.5;
+  background: var(--gray);
+  opacity: 0.6;
   width: 100%;
   height: 100%;
 }
 
+.modal-controls-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.modal-controls {
+  background-color: var(--mint-green);
+  color: var(--dark-green);
+  border: 3px dotted var(--dark-green);
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.modal-controls:hover {
+  transform: scale(1.1);
+  transition: 0.3s ease-in-out;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 2rem 2rem 2rem;
+}
+
+.modal-close-container {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  padding: 10px 10px 0 0;
+}
+
+.modal-close {
+  fill: var(--dark-green);
+  width: 1em;
+  height: 1em;
+  cursor: pointer;
+  display: flex;
+  justify-content: end;
+}
+
+.modal-close:hover,
+.book-close:hover {
+  transform: scale(1.3);
+  transition: 0.3s ease-in-out;
+}
+
+/* ------- Shared Modal Styles End ------- */
+
+/* ------- Add New Book Modal Start ------- */
+
 .modal-add-form {
-  border-radius: 10px;
+  border-radius: 5px;
   width: calc(150px + 10vw);
   background-color: var(--light-green);
-  position: relative;
-  padding: 30px;
+  position: relative; /* also works with z-index to push it on top of the background click event */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -177,21 +222,16 @@ main {
   box-shadow: 0px 0px 0px 12px rgba(197, 216, 164, 1);
 }
 
-.modal-add-form svg {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 10px;
-}
-
 .modal-label {
   color: var(--dark-green);
+  font-size: 36px;
 }
 
 .modal-input {
   background-color: transparent;
   border: none;
   border-bottom: 2px dotted var(--dark-green);
+  font-size: 24px;
 }
 
 .modal-input:focus {
@@ -209,7 +249,13 @@ main {
 .checkbox-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 10px;
+}
+
+.checkbox {
+  width: 25px;
+  height: 25px;
 }
 
 .checkbox:hover,
@@ -221,24 +267,19 @@ main {
   accent-color: var(--dark-green);
 }
 
-.modal-controls-container {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+::-webkit-datetime-edit-text {
+  color: var(--green);
+  padding: 0 0.3em;
 }
 
-.modal-controls {
-  background-color: var(--mint-green);
-  color: var(--dark-green);
-  border: 3px dotted var(--dark-green);
-  padding: 5px 10px;
-  border-radius: 8px;
-  cursor: pointer;
+::-webkit-datetime-edit-month-field,
+::-webkit-datetime-edit-day-field,
+::-webkit-datetime-edit-year-field {
+  color: var(--mint-green);
 }
 
-.modal-controls:hover {
-  transform: scale(1.1);
-  transition: 0.3s ease-in-out;
+::-webkit-calendar-picker-indicator {
+  filter: contrast(40%);
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -253,44 +294,32 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+/* ------- Add New Book Modal End ------- */
+
+/* ------- Delete Book Modal Start ------- */
+
 .modal-delete-form {
   border-radius: 10px;
   background-color: var(--light-green);
   position: relative;
-  padding: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
   box-shadow: 0px 0px 0px 12px rgba(197, 216, 164, 1);
 }
 
 .delete-confirm {
   color: var(--dark-green);
+  font-size: 36px;
+  padding: 20px;
 }
 
-/** book modal start **/
+/* ------- Delete Book Modal End ------- */
 
-.modal-book {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* ------- Book Info Modal Start ------- */
 
-.modal-book.open {
-  visibility: visible;
-  opacity: 1;
-  transition-delay: 0s;
-}
-
-.book-info {
+.book-info-container {
   border-radius: 10px;
   background-color: var(--white);
   position: relative;
@@ -301,14 +330,16 @@ input[type="number"] {
   box-shadow: 0px 0px 0px 12px var(--red);
 }
 
-.modal-close-container {
+.book-close {
+  color: var(--black);
+  width: 1em;
+  height: 1em;
+  cursor: pointer;
   display: flex;
   justify-content: end;
-  align-items: end;
-  padding: 10px 10px 0 0;
 }
 
-.output-container {
+.book-info {
   padding: 0 30px 0 30px;
   display: flex;
   flex-direction: column;
@@ -324,56 +355,33 @@ input[type="number"] {
   text-align: center;
   background-color: transparent;
   border: none;
-  width: max-content
+  width: max-content;
 }
 
 .book-label,
 .book-content {
-  font-size: 24px;
- 
+  font-size: 1.7rem;
 }
 
-.output-book-title {
+#output-title {
   font-size: 2.5rem;
   word-wrap: break-word;
-}
-
-
-.modal-close {
-  fill: var(--dark-green);
-  width: 1em;
-  height: 1em;
-  cursor: pointer;
-}
-
-.modal-close:hover {
-  transform: scale(1.3);
-  transition: 0.3s ease-in-out;
+  text-transform: uppercase;
 }
 
 .book-label {
   color: var(--black);
 }
 
-
-.output-container div {
+.book-info div {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.output-container div h2 {
+.book-info div h2 {
   font-weight: bold;
-}
-
-.output-info {
-  display: flex;
-  justify-content: space-between;
-}
-
-.test {
-  text-align: end;
 }
 
 .book-controls {
@@ -384,15 +392,16 @@ input[type="number"] {
   border: none;
 }
 
-.delete-book {
+#delete-book {
   width: 50px;
   height: 50px;
   cursor: pointer;
+  stroke: var(--black);
 }
 
-.delete-book:hover {
+#delete-book:hover {
   transform: scale(1.1);
   transition: 0.3s ease-in-out;
 }
 
-/** book modal start **/
+/* ------- Book Info Modal End ------- */

@@ -4,7 +4,7 @@ const delForm = document.querySelector(".modal-delete-form");
 const bookContainer = document.querySelector(".shelf");
 const deleteCurrentBook = document.getElementById("delete-book");
 const closeOnSubmit = document.querySelector(".modal");
-const test = document.querySelector(".modal-delete");
+const closeOnDelete = document.querySelector(".modal-delete");
 
 modals.forEach(function (trigger) {
   trigger.addEventListener("click", function (event) {
@@ -128,5 +128,5 @@ delForm.addEventListener("submit", function (e) {
   e.preventDefault();
   allBooks.length = 0;
   bookContainer.innerHTML = "";
-  test.classList.remove("open");
+  closeOnDelete.classList.remove("open");
 });

@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Open+Sans&display=swap");
 
 :root {
-  --pale-turquoise: #80dae7;
+  --pale-turquoise: #8bf0ff;
   --light-blue: #e6f8fa;
   --turquoise: #34c4d9;
   --dark-turquoise: #184966;
@@ -28,7 +28,12 @@
 /* ------- Page Layout Start ------- */
 
 body {
-  background-color: var(--pale-turquoise);
+  background: rgb(70, 211, 252);
+  background: linear-gradient(
+    180deg,
+    rgba(70, 211, 252, 1) 31%,
+    rgba(19, 107, 194, 1) 100%
+  );
 }
 
 main {
@@ -45,7 +50,7 @@ main {
 /* ------- Book shelf Section Start ------- */
 
 .page-title {
-  color: var(--dark-turquoise);
+  color: var(--white);
   font-size: calc(2rem + 2vh);
   padding: 1em;
 }

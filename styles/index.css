@@ -414,7 +414,21 @@ input[type="number"] {
   border: none;
 }
 
-.book-controls > button
+#star-button {
+  border: none;
+  background: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#star-button:active {
+  outline: none;
+}
+
+/* .star-icons img {
+ 
+} */
 
 #delete-book {
   width: 50px;

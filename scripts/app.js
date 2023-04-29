@@ -119,6 +119,12 @@ function createBookButton(book) {
 
     modal.classList.add("open");
 
+    const starButton = document.getElementById("star-button");
+    starButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      toggleStar(book);
+    });
+
     const exits = modal.querySelectorAll(".modal-exit");
     exits.forEach(function (exit) {
       exit.addEventListener("click", function (event) {
@@ -149,6 +155,7 @@ function createBookButton(book) {
     outputAuthor.textContent = book.author;
     outputPages.textContent = book.pages;
     outputPublished.textContent = book.published;
+
     //displays different icons if read or not
     if (book.read) {
       document.getElementById("star-1").style.display = "block";
@@ -161,16 +168,16 @@ function createBookButton(book) {
   randomBook(bookButton);
   return bookButton;
 }
-let isFilled = false;
-function toggleStar() {
+
+function toggleStar(book) {
+  // toggle the book.read property
+  book.read = !book.read;
+
   const star1 = document.getElementById("star-1");
   const star2 = document.getElementById("star-2");
 
-  // toggle the isFilled state
-  isFilled = !isFilled;
-
-  // toggle the images based on the isFilled state
-  if (isFilled) {
+  // toggle the images based on the book.read property
+  if (book.read) {
     star1.style.display = "inline";
     star2.style.display = "none";
   } else {
@@ -209,7 +216,7 @@ function getCurrentShelf() {
 //add Title to book button on shelf
 function createBookTitle(book) {
   const bookTitle = document.createElement("p");
-  bookTitle.textContent = `${book.title}`;
+  bookTitle.textContent = `${book.title.trim()}`;
   bookTitle.classList.add("book-title");
   return bookTitle;
 }

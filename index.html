@@ -74,6 +74,9 @@
               id="book-title"
               name="Title"
               placeholder="Book Title"
+              pattern="[A-Za-z]{1,20}"
+              title="Please only enter characters."
+              required
             />
 
             <label for="author" class="modal-label">Author:</label>
@@ -83,6 +86,9 @@
               id="author"
               name="Author"
               placeholder="Author Name"
+              pattern="[A-Za-z]{1,20}"
+              title="Please only enter characters."
+              required
             />
 
             <label for="pages-count" class="modal-label"
@@ -94,6 +100,10 @@
               id="pages-count"
               name="Number of Pages"
               placeholder="Number of Pages"
+              min="1"
+              max="999"
+              pattern="[0-9]"
+              required
             />
 
             <label for="publish-date" class="modal-label">Published:</label>
@@ -102,6 +112,7 @@
               class="modal-input"
               name="Publish Date"
               id="publish-date"
+              required
             />
 
             <div class="checkbox-container">

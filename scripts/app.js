@@ -96,7 +96,7 @@ function addBookToShelf() {
 
   // Add a unique class name to the book button
   newBook.classList.add("book-" + (allBooks.length - 1));
-  newBook.setAttribute("id", "book--");
+  newBook.setAttribute("id", "book-id");
 
   clearInputFields();
 }
@@ -218,20 +218,21 @@ document.getElementById("publish-date").max = new Date()
   .split("T")[0];
 
 //function that creates a random book
-function randomBook(test) {
+function randomBook(randomColour) {
   const RNG = Math.floor(Math.random() * 3);
-  const test1 = document.getElementById("book--");
+  const bookId = document.getElementById("book-id");
 
   switch (RNG) {
     case 0:
       return (
-        (test.style.backgroundColor = "#b8bfd9"), (test.style.height = "70%")
+        (randomColour.style.backgroundColor = "#b8bfd9"),
+        (randomColour.style.height = "70%")
       );
 
     case 1:
-      return (test.style.backgroundColor = "#aa3838");
+      return (randomColour.style.backgroundColor = "#aa3838");
 
     case 2:
-      return (test.style.backgroundColor = "#64876a");
+      return (randomColour.style.backgroundColor = "#64876a");
   }
 }

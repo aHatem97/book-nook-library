@@ -1,8 +1,6 @@
 const modals = document.querySelectorAll("[data-modal]");
 const addForm = document.querySelector(".modal-add-form");
 const delForm = document.querySelector(".modal-delete-form");
-const bookContainer = document.querySelector(".shelf");
-const allShelves = document.querySelectorAll(".shelf");
 const deleteCurrentBook = document.getElementById("delete-book");
 const closeOnSubmit = document.querySelector(".modal");
 const closeOnDelete = document.querySelector(".modal-delete");
@@ -98,6 +96,7 @@ function addBookToShelf() {
 
   // Add a unique class name to the book button
   newBook.classList.add("book-" + (allBooks.length - 1));
+  newBook.setAttribute("id", "book-id");
 
   clearInputFields();
 }
@@ -159,6 +158,7 @@ function createBookButton(book) {
       document.getElementById("star-2").style.display = "block";
     }
   });
+  randomBook(bookButton);
   return bookButton;
 }
 let isFilled = false;
@@ -233,3 +233,23 @@ delForm.addEventListener("submit", function (e) {
 document.getElementById("publish-date").max = new Date()
   .toISOString()
   .split("T")[0];
+
+//function that creates a random book
+function randomBook(randomColour) {
+  const RNG = Math.floor(Math.random() * 3);
+  const bookId = document.getElementById("book-id");
+
+  switch (RNG) {
+    case 0:
+      return (
+        (randomColour.style.backgroundColor = "#b8bfd9"),
+        (randomColour.style.height = "70%")
+      );
+
+    case 1:
+      return (randomColour.style.backgroundColor = "#aa3838");
+
+    case 2:
+      return (randomColour.style.backgroundColor = "#64876a");
+  }
+}

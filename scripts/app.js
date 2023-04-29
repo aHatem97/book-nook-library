@@ -151,6 +151,8 @@ function createBookButton(book) {
 let currentShelf = getCurrentShelf();
 
 function createNewShelf() {
+  const shelves = [...document.querySelectorAll(".shelf")];
+  console.log("# of shelves: ");
   let shelfCount = 1;
   const newShelf = document.createElement("div");
   newShelf.classList.add("shelf");

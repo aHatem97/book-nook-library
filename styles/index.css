@@ -3,17 +3,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Open+Sans&display=swap");
 
 :root {
-  --mint-green: #c5d8a4;
-  --light-green: #f4fcd9;
-  --green: #64876a;
-  --dark-green: #3b4f18;
+  --pale-turquoise: #80dae7;
+  --light-blue: #e6f8fa;
+  --turquoise: #34c4d9;
+  --dark-turquoise: #184966;
   --light-brown: #bb9981;
   --dark-brown: #534340;
   --red: #aa3838;
-  --light-blue: #b8bfd9;
+  --gray-blue: #b8bfd9;
   --black: #000000;
   --white: #ffffff;
   --gray: #808080;
+  --light-gray: #adadad;
 }
 
 * {
@@ -27,16 +28,17 @@
 /* ------- Page Layout Start ------- */
 
 body {
-  background-color: var(--mint-green);
+  background-color: var(--pale-turquoise);
 }
 
 main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 20px;
   height: 100vh;
+  padding-top: 2em;
 }
 
 /* ------- Page Layout End ------- */
@@ -44,7 +46,8 @@ main {
 /* ------- Book shelf Section Start ------- */
 
 .page-title {
-  color: var(--dark-green);
+  color: var(--dark-turquoise);
+  font-size: calc(2rem + 2vh);
 }
 
 .shelves-container {
@@ -94,9 +97,10 @@ main {
 }
 
 .book-title {
-  font-size: 1.5rem;
+  font-size: clamp(16px, 1.2rem, 1.5rem);
   font-weight: bold;
   writing-mode: vertical-rl;
+  color: var(--white);
   rotate: 180deg;
 }
 
@@ -113,7 +117,7 @@ main {
 .control-btn {
   border-radius: 50%;
   border: none;
-  background-color: var(--light-green);
+  background-color: var(--light-blue);
   cursor: pointer;
   display: flex;
 
@@ -166,9 +170,9 @@ main {
 }
 
 .modal-controls {
-  background-color: var(--mint-green);
-  color: var(--dark-green);
-  border: 3px dotted var(--dark-green);
+  background-color: var(--pale-turquoise);
+  color: var(--dark-turquoise);
+  border: 3px dotted var(--dark-turquoise);
   padding: 5px 10px;
   border-radius: 8px;
   cursor: pointer;
@@ -196,7 +200,7 @@ main {
 }
 
 .modal-close {
-  fill: var(--dark-green);
+  fill: var(--dark-turquoise);
   width: 1em;
   height: 1em;
   cursor: pointer;
@@ -217,24 +221,24 @@ main {
 .modal-add-form {
   border-radius: 5px;
   width: calc(150px + 10vw);
-  background-color: var(--light-green);
+  background-color: var(--light-blue);
   position: relative; /* also works with z-index to push it on top of the background click event */
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 10px;
-  box-shadow: 0px 0px 0px 12px rgba(197, 216, 164, 1);
+  box-shadow: 0px 0px 0px 12px var(--dark-turquoise);
 }
 
 .modal-label {
-  color: var(--dark-green);
+  color: var(--dark-turquoise);
   font-size: 1.3rem;
 }
 
 .modal-input {
   background-color: transparent;
   border: none;
-  border-bottom: 2px dotted var(--dark-green);
+  border-bottom: 2px dotted var(--dark-turquoise);
   font-size: 1rem;
 }
 
@@ -243,7 +247,7 @@ main {
 }
 
 .modal-input::placeholder {
-  color: var(--mint-green);
+  color: var(--light-gray);
 }
 
 .modal-input:focus::placeholder {
@@ -271,18 +275,18 @@ main {
 }
 
 #read-book {
-  accent-color: var(--dark-green);
+  accent-color: var(--dark-turquoise);
 }
 
 ::-webkit-datetime-edit-text {
-  color: var(--green);
+  color: var(--light-gray);
   padding: 0 0.3em;
 }
 
 ::-webkit-datetime-edit-month-field,
 ::-webkit-datetime-edit-day-field,
 ::-webkit-datetime-edit-year-field {
-  color: var(--mint-green);
+  color: var(--light-gray);
 }
 
 ::-webkit-calendar-picker-indicator {
@@ -312,17 +316,17 @@ input[type="number"] {
 
 .modal-delete-form {
   border-radius: 10px;
-  background-color: var(--light-green);
+  background-color: var(--light-blue);
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 15px;
-  box-shadow: 0px 0px 0px 12px rgba(197, 216, 164, 1);
+  box-shadow: 0px 0px 0px 12px var(--dark-turquoise);
 }
 
 .delete-confirm {
-  color: var(--dark-green);
+  color: var(--dark-turquoise);
   font-size: 36px;
   padding: 20px;
 }

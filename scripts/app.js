@@ -7,7 +7,7 @@ const deleteCurrentBook = document.getElementById("delete-book");
 const closeOnSubmit = document.querySelector(".modal");
 const closeOnDelete = document.querySelector(".modal-delete");
 const shelfContainer = document.querySelector(".shelves-container");
-const shelfContainerTest = document.querySelectorAll(".shelves-container");
+const shelfContainerAll = document.querySelectorAll(".shelves-container");
 
 modals.forEach(function (trigger) {
   trigger.addEventListener("click", function (event) {
@@ -78,10 +78,21 @@ function addBookToShelf() {
   const bookTitle = createBookTitle(addBook);
   newBook.appendChild(bookTitle);
 
-  if (currentShelf.children.length <= 1) {
-    currentShelf.appendChild(newBook);
-  } else {
-    currentShelf = createNewShelf(shelfContainer);
+  const shelves = shelfContainer.querySelectorAll(".shelf");
+  let foundShelf = false; // variable to keep track of whether a suitable shelf has been found
+
+  for (let i = 0; i < shelves.length; i++) {
+    let currentShelf = shelves[i];
+    if (currentShelf.children.length <= 1) {
+      currentShelf.appendChild(newBook);
+      foundShelf = true; // set foundShelf to true if a suitable shelf is found
+      break; // exit the loop since we've appended the new book
+    }
+  }
+
+  if (!foundShelf) {
+    // if no suitable shelf has been found, create a new one
+    let currentShelf = createNewShelf(shelfContainer);
     currentShelf.appendChild(newBook);
   }
 
@@ -121,7 +132,11 @@ function createBookButton(book) {
       event.preventDefault();
       let currentBook = allBooks.indexOf(book);
       allBooks.splice(currentBook, 1);
-      bookContainer.removeChild(bookButton);
+      shelfContainerAll.forEach(function () {
+        let shelf = bookButton.parentNode;
+        shelf.removeChild(bookButton);
+      });
+
       modal.classList.remove("open");
     });
 
@@ -187,17 +202,14 @@ function createBookTitle(book) {
 // delete all then close modal
 delForm.addEventListener("submit", function (e) {
   e.preventDefault();
-  console.log(allBooks);
   allBooks = [];
-  console.log(allBooks);
-  shelfContainerTest.forEach((shelf) => {
-    console.log("here", shelf.childNodes.length);
-    console.log(shelf.childNodes);
-    if (shelf.childNodes.length > 1) {
+  shelfContainerAll.forEach((shelf) => {
+    while (shelf.hasChildNodes()) {
       shelf.removeChild(shelf.lastChild);
-      shelf.innerHTML = "";
     }
+    createNewShelf();
   });
+  currentShelf = getCurrentShelf();
 
   closeOnDelete.classList.remove("open");
 });

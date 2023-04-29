@@ -97,6 +97,53 @@ function addBookToShelf() {
   // Add a unique class name to the book button
   newBook.classList.add("book-" + (allBooks.length - 1));
   newBook.setAttribute("id", "book-id");
+  const bookId = document.getElementById("book-id");
+  console.log(bookId);
+
+  bookId.addEventListener("dragstart", dragStart);
+  bookId.addEventListener("dropend", dropEnd);
+
+  // Drag item
+  for (let shelf of shelves) {
+    shelf.addEventListener("dragover", dragOver);
+    shelf.addEventListener("dragenter", dragEnter);
+    shelf.addEventListener("dragleave", dragLeave);
+    shelf.addEventListener("drop", Drop);
+  }
+  function dragStart() {
+    setTimeout(() => this.classList.add("invisible"), 0);
+  }
+
+  // Drop item
+  function dropEnd() {
+    this.classList.add("placeholder");
+  }
+
+  // Drop item
+  function dragOver(e) {
+    console.log("dragOver");
+    e.preventDefault();
+  }
+
+  // Drop item
+  function dragEnter(e) {
+    console.log("dragEnter");
+    e.preventDefault();
+  }
+
+  // Drop item
+  function dragLeave(e) {
+    console.log("dragLeave");
+    e.preventDefault();
+  }
+
+  // Drop item
+  function Drop(e) {
+    this.className = "shelf";
+    this.append(bookId);
+    console.log("Drop");
+    e.preventDefault();
+  }
 
   clearInputFields();
 }
@@ -220,7 +267,6 @@ document.getElementById("publish-date").max = new Date()
 //function that creates a random book
 function randomBook(randomColour) {
   const RNG = Math.floor(Math.random() * 3);
-  const bookId = document.getElementById("book-id");
 
   switch (RNG) {
     case 0:

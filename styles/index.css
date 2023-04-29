@@ -33,6 +33,7 @@ body {
 main {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 20px;
   height: 100vh;
@@ -417,3 +418,24 @@ input[type="number"] {
 }
 
 /* ------- Book Info Modal End ------- */
+
+/*---------TABLET MEDIA QUERIES START---------*/
+@media only screen and (max-width: 1000px) {
+  .shelves-container {
+    grid-template-columns: repeat(1, minmax(40vw, 60vw));
+  }
+
+  .shelf {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/*---------TABLET MEDIA QUERIES END---------*/
+
+/*---------MOBILE MEDIA QUERIES START---------*/
+@media only screen and (max-width: 600px) {
+  .shelf {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+/*---------MOBILE MEDIA QUERIES END---------*/

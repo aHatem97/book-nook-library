@@ -45,15 +45,15 @@ addForm.addEventListener("submit", (e) => {
 //Call Event Handler for adding books
 function handleFormSubmit(e) {
   e.preventDefault();
-  const titleInput = document.getElementById("book-title").value;
-  const authorInput = document.getElementById("author").value;
+
   //checks if book exists in array first
   const existingBook = allBooks.find((book) => {
-    return book.title === titleInput && book.author === authorInput;
+    const titleInput = document.getElementById("book-title").value;
+    return book.title === titleInput;
   });
 
   if (existingBook) {
-    alert("This book already exists! Please add a different book.");
+    alert("This book title already exists! Please add a different book.");
     return;
   } else {
     closeOnSubmit.classList.remove("open");
@@ -161,12 +161,28 @@ function createBookButton(book) {
   });
   return bookButton;
 }
+let isFilled = false;
+function toggleStar() {
+  const star1 = document.getElementById("star-1");
+  const star2 = document.getElementById("star-2");
+
+  // toggle the isFilled state
+  isFilled = !isFilled;
+
+  // toggle the images based on the isFilled state
+  if (isFilled) {
+    star1.style.display = "inline";
+    star2.style.display = "none";
+  } else {
+    star1.style.display = "none";
+    star2.style.display = "inline";
+  }
+}
 
 //Create new Shelf
 let currentShelf = getCurrentShelf();
 
 function createNewShelf() {
-
   let shelfCount = 1;
   const newShelf = document.createElement("div");
   newShelf.classList.add("shelf");

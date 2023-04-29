@@ -75,7 +75,7 @@
               name="Title"
               placeholder="Book Title"
               pattern="[A-Za-z]{1,20}"
-              title="Please only enter characters."
+              title="Please only enter 20 characters."
               required
             />
 
@@ -87,7 +87,7 @@
               name="Author"
               placeholder="Author Name"
               pattern="[A-Za-z]{1,20}"
-              title="Please only enter characters."
+              title="Please only enter 20 characters."
               required
             />
 
@@ -101,7 +101,7 @@
               name="Number of Pages"
               placeholder="Number of Pages"
               min="1"
-              max="999"
+              max="2000"
               pattern="[0-9]"
               required
             />
@@ -243,13 +243,15 @@
               <h2 class="book-label">Published:</h2>
               <p type="text" id="output-published" class="book-content"></p>
             </div>
+            <div id="output-read" class="star-icons">
+              <button onclick="toggleStar()" id="star-button">
+                <img src="./assets/icons/star_filled.svg" alt="" id="star-1" />
+                <img src="./assets/icons/star_outline.svg" alt="" id="star-2" />
+              </button>
+            </div>
           </section>
 
           <button class="book-controls">
-            <div id="output-read" class="star-icons">
-              <img src="./assets/icons/star_filled.svg" alt="" id="star-1" />
-              <img src="./assets/icons/star_outline.svg" alt="" id="star-2" />
-            </div>
             <svg
               id="delete-book"
               viewBox="0 0 24 24"

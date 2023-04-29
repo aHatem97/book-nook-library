@@ -63,6 +63,7 @@ main {
   gap: 20px;
   background-color: var(--dark-brown);
   padding: 10px 10px 0 10px;
+  align-items: end;
 }
 
 .shelf:first-child {
@@ -83,7 +84,6 @@ main {
   cursor: pointer;
   height: 100%;
   border: none;
-  background-color: #aa3838;
 }
 
 .book:hover {

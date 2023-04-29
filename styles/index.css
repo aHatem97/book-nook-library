@@ -38,7 +38,6 @@ main {
   align-items: center;
   gap: 20px;
   height: 100vh;
-  padding-top: 2em;
 }
 
 /* ------- Page Layout End ------- */
@@ -48,6 +47,7 @@ main {
 .page-title {
   color: var(--dark-turquoise);
   font-size: calc(2rem + 2vh);
+  padding: 1em;
 }
 
 .shelves-container {

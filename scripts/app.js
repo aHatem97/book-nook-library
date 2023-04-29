@@ -2,10 +2,12 @@ const modals = document.querySelectorAll("[data-modal]");
 const addForm = document.querySelector(".modal-add-form");
 const delForm = document.querySelector(".modal-delete-form");
 const bookContainer = document.querySelector(".shelf");
+const allShelves = document.querySelectorAll(".shelf");
 const deleteCurrentBook = document.getElementById("delete-book");
 const closeOnSubmit = document.querySelector(".modal");
 const closeOnDelete = document.querySelector(".modal-delete");
 const shelfContainer = document.querySelector(".shelves-container");
+const shelfContainerTest = document.querySelectorAll(".shelves-container");
 
 modals.forEach(function (trigger) {
   trigger.addEventListener("click", function (event) {
@@ -16,6 +18,7 @@ modals.forEach(function (trigger) {
     exits.forEach(function (exit) {
       exit.addEventListener("click", function (event) {
         event.preventDefault();
+        clearInputFields();
         modal.classList.remove("open");
       });
     });
@@ -58,8 +61,93 @@ function handleFormSubmit(e) {
   }
 }
 
-//Create new Shelf
+//Create Book
+function addBookToShelf() {
+  const checkbox = document.getElementById("read-book");
+  const readBook = checkbox.checked; //returns true or false value if checkbox was checked
 
+  const addBook = new Book(
+    document.getElementById("book-title").value,
+    document.getElementById("author").value,
+    document.getElementById("pages-count").value,
+    document.getElementById("publish-date").value,
+    readBook
+  );
+  allBooks.push(addBook);
+  const newBook = createBookButton(addBook);
+  const bookTitle = createBookTitle(addBook);
+  newBook.appendChild(bookTitle);
+
+  if (currentShelf.children.length <= 1) {
+    currentShelf.appendChild(newBook);
+  } else {
+    currentShelf = createNewShelf(shelfContainer);
+    currentShelf.appendChild(newBook);
+  }
+
+  // Add a unique class name to the book button
+  newBook.classList.add("book-" + (allBooks.length - 1));
+
+  clearInputFields();
+}
+
+// Clears form Inputs after submit
+function clearInputFields() {
+  document.getElementById("form").reset();
+}
+
+//Creates Book Button UI
+function createBookButton(book) {
+  const bookButton = document.createElement("button");
+  bookButton.classList.add("book");
+  bookButton.setAttribute("data-modal", "modal-book");
+  bookButton.setAttribute("draggable", "true");
+
+  bookButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    const modal = document.getElementById(bookButton.dataset.modal);
+
+    modal.classList.add("open");
+
+    const exits = modal.querySelectorAll(".modal-exit");
+    exits.forEach(function (exit) {
+      exit.addEventListener("click", function (event) {
+        event.preventDefault();
+        modal.classList.remove("open");
+      });
+    });
+
+    deleteCurrentBook.addEventListener("click", function (event) {
+      event.preventDefault();
+      let currentBook = allBooks.indexOf(book);
+      allBooks.splice(currentBook, 1);
+      bookContainer.removeChild(bookButton);
+      modal.classList.remove("open");
+    });
+
+    //populating modal with our object
+    const outputTitle = document.querySelector("#output-title");
+    const outputAuthor = document.querySelector("#output-author");
+    const outputPages = document.querySelector("#output-pages");
+    const outputPublished = document.querySelector("#output-published");
+
+    outputTitle.textContent = book.title;
+    outputAuthor.textContent = book.author;
+    outputPages.textContent = book.pages;
+    outputPublished.textContent = book.published;
+    //displays different icons if read or not
+    if (book.read) {
+      document.getElementById("star-1").style.display = "block";
+      document.getElementById("star-2").style.display = "none";
+    } else {
+      document.getElementById("star-1").style.display = "none";
+      document.getElementById("star-2").style.display = "block";
+    }
+  });
+  return bookButton;
+}
+
+//Create new Shelf
 let currentShelf = getCurrentShelf();
 
 function createNewShelf() {
@@ -86,96 +174,10 @@ function getCurrentShelf() {
   return currentShelf;
 }
 
-//Create Book
-function addBookToShelf() {
-  const checkbox = document.getElementById("read-book");
-  const readBook = checkbox.checked; //returns true or false value if checkbox was checked
-
-  const addBook = new Book(
-    document.getElementById("book-title").value,
-    document.getElementById("author").value,
-    document.getElementById("pages-count").value,
-    document.getElementById("publish-date").value,
-    readBook
-  );
-  allBooks.push(addBook);
-  console.log(allBooks);
-  const newBook = createBookButton(addBook);
-  const bookTitle = createBookTitle(addBook);
-  newBook.appendChild(bookTitle);
-
-  currentShelf.appendChild(newBook);
-
-  // Check if the current shelf contains 3 buttons
-  if (currentShelf.children.length >= 3) {
-    // Create a new shelf
-    currentShelf = createNewShelf(shelfContainer);
-  }
-
-  // Add a unique class name to the book button
-  newBook.classList.add("book-" + (allBooks.length - 1));
-
-  clearInputFields();
-}
-
-// Clears form Inputs after submit
-function clearInputFields() {
-  document.getElementById("form").reset();
-}
-
-//Creates Book Button UI
-function createBookButton(book) {
-  const bookButton = document.createElement("button");
-  bookButton.classList.add("book");
-  bookButton.setAttribute("data-modal", "modal-book");
-
-  bookButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    const modal = document.getElementById(bookButton.dataset.modal);
-    const exits = modal.querySelectorAll(".modal-exit");
-
-    modal.classList.add("open");
-    deleteCurrentBook.addEventListener("click", function (event) {
-      event.preventDefault();
-      //  let currentBook = allBooks.indexOf(book);
-      //  let removeThis = allBooks.splice(currentBook, 1);
-      //  console.log("removeThis: ", removeThis);
-      //  console.log("button before: ", bookButton);
-      bookContainer.removeChild(bookButton);
-      modal.classList.remove("open");
-    });
-
-    exits.forEach(function (exit) {
-      exit.addEventListener("click", function (event) {
-        event.preventDefault();
-        closeOnSubmit.classList.remove("open");
-      });
-    });
-    //populating modal with our object
-    const outputTitle = document.querySelector("#output-title");
-    const outputAuthor = document.querySelector("#output-author");
-    const outputPages = document.querySelector("#output-pages");
-    const outputPublished = document.querySelector("#output-published");
-
-    outputTitle.textContent = book.title;
-    outputAuthor.textContent = book.author;
-    outputPages.textContent = book.pages;
-    outputPublished.textContent = book.published;
-    //displays different icons if read or not
-    if (book.read) {
-      document.getElementById("star-1").style.display = "block";
-      document.getElementById("star-2").style.display = "none";
-    } else {
-      document.getElementById("star-1").style.display = "none";
-      document.getElementById("star-2").style.display = "block";
-    }
-  });
-  return bookButton;
-}
 //add Title to book button on shelf
 function createBookTitle(book) {
   const bookTitle = document.createElement("p");
-  bookTitle.textContent = `"${book.title}`;
+  bookTitle.textContent = `${book.title}`;
   bookTitle.classList.add("book-title");
   return bookTitle;
 }
@@ -183,7 +185,22 @@ function createBookTitle(book) {
 // delete all then close modal
 delForm.addEventListener("submit", function (e) {
   e.preventDefault();
-  allBooks.length = 0;
-  bookContainer.innerHTML = "";
+  console.log(allBooks);
+  allBooks = [];
+  console.log(allBooks);
+  shelfContainerTest.forEach((shelf) => {
+    console.log("here", shelf.childNodes.length);
+    console.log(shelf.childNodes);
+    if (shelf.childNodes.length > 1) {
+      shelf.removeChild(shelf.lastChild);
+      shelf.innerHTML = "";
+    }
+  });
+
   closeOnDelete.classList.remove("open");
 });
+
+// Prevents dates after today being selectable
+document.getElementById("publish-date").max = new Date()
+  .toISOString()
+  .split("T")[0];

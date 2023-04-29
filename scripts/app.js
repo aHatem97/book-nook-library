@@ -79,18 +79,12 @@ function addBookToShelf() {
   newBook.appendChild(bookTitle);
 
   const shelves = shelfContainer.querySelectorAll(".shelf");
-  console.log("shelves: ", shelves);
   let foundShelf = false; // variable to keep track of whether a suitable shelf has been found
 
   for (let i = 0; i < shelves.length; i++) {
-    console.log("ggggggggggg", shelves);
-    console.log("++++++++", shelves.length);
     let currentShelf = shelves[i];
-    console.log("currentshelf 1: ", currentShelf);
     if (currentShelf.children.length <= 1) {
-      console.log("shelves length 1: ", shelves.length);
       currentShelf.appendChild(newBook);
-      console.log("first i: ", i);
       foundShelf = true; // set foundShelf to true if a suitable shelf is found
       break; // exit the loop since we've appended the new book
     }
@@ -99,7 +93,6 @@ function addBookToShelf() {
   if (!foundShelf) {
     // if no suitable shelf has been found, create a new one
     let currentShelf = createNewShelf(shelfContainer);
-    console.log("currentShelf 3: ", currentShelf);
     currentShelf.appendChild(newBook);
   }
 
